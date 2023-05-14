@@ -1,8 +1,8 @@
 ;;Warning. I am using case sensitive lisp for more pretty parsing.
 
-;(setq domainfile "blocksworld-domain.pddl")
-;(setq problemfile "blocksworld-problem.pddl")
-;(setq outputfile "blocksworld")
+;(setq domainfile "logistics-domain.pddl")
+;(setq problemfile "logistics-problem.pddl")
+;(setq outputfile "test")
 
 
 (defun stringconvert (st)
@@ -16,15 +16,20 @@
       s)
 ))
 
+;(setq domainfile "mprime-domain.pddl")
+;(setq problemfile "mprime-problem.pddl")
+;(setq outputfile "mprime")
+
+
 (load "../auto/domain_agda")
 (load "../auto/problem_agda")
 
-;(print objList)
-;(print init)
-;(print goal)
-;(print predicates)
-;(print actionList)
-;(print context)
+(print objList)
+(print init)
+(print goal)
+(print predicates)
+(print actionList)
+(print context)
 
 ;(setf (readtable-case *readtable*) :preserve)
 ;(SETQ help (READ))
@@ -47,7 +52,6 @@
   (write-line "open import Data.List.Relation.Unary.Any" my-stream)
   (write-line "open import Relation.Nullary using (yes; no; Dec)" my-stream)
   (write-line "open import Level" my-stream)
-  (write-line "open import Data.Product" my-stream)
   (write-line "open import Tactic.Deriving.Eq" my-stream)
 
   ;constants
@@ -73,52 +77,56 @@
   (write-line "-- EqAction : Eq Action" my-stream)
   (write-line "unquoteDecl EqAction = deriveEq EqAction (quote Action)" my-stream)
 
+  ;import
+  (write-line "" my-stream)
+  (write-line "open import Mangle using (mangle)" my-stream)
 
-  ;import domain 
-  (write-line "open import Plans.Domain.Core Action R" my-stream)
+  ;decidablity proofs
+  (write-line "" my-stream)
+  (write-line "isDecidable : IsDecEquivalence {zero} {zero} (_≡_ {A = R})" my-stream)
+  (write-line "isDecidable = record { isEquivalence = record {" my-stream)
+  (write-line "  refl = λ {x} → refl ;" my-stream)
+  (write-line "  sym = λ x → sym x ;" my-stream)
+  (write-line "  trans = trans } ;" my-stream)
+  (write-line " _≟_ = mangle  }" my-stream)
+
+
+  (write-line "" my-stream)
+  (write-line "isDEC : IsDecEquivalence {zero} {zero} (_≡_ {A = C})" my-stream)
+  (write-line "isDEC = record { isEquivalence = record {" my-stream)
+  (write-line "  refl = λ {x} → refl ;" my-stream)
+  (write-line "  sym = λ x → sym x ;" my-stream)
+  (write-line "  trans = trans } ;" my-stream)
+  (write-line "  _≟_ = mangle  }" my-stream)
+
+  (write-line "" my-stream)
+  (write-line "isDECA : IsDecEquivalence {zero} {zero} (_≡_ {A = Action})" my-stream)
+  (write-line "isDECA = record { isEquivalence = record {" my-stream)
+  (write-line "  refl = λ {x} → refl ;" my-stream)
+  (write-line "  sym = λ x → sym x ;" my-stream)
+  (write-line "  trans = trans } ;" my-stream)
+  (write-line "  _≟_ = mangle  }" my-stream)
+
+  ;instantiate proof system
+  (write-line "" my-stream)
+  (write-line "open import PCPLogic {Action} {R} {C} {isDecidable} {isDEC} {isDECA}" my-stream)
+  (write-line "open import Grammar {Action} {R} {C}" my-stream)
+  (write-line "open import Membership_And_State {Action} {R} {C} {isDecidable} {isDEC} {isDECA}" my-stream)
+  (write-line "open import Subtyping PredMap isSame" my-stream)
+  (write-line "open import Proofs.Consistency {Action} {R} {C} {isDecidable} {isDEC} {isDECA}" my-stream)
+
+  (write-line "" my-stream)
+  (write-line "open import Data.Product" my-stream)
 
   ;context
   (write-line "" my-stream)
-  (write-line "Γ : Context" my-stream)
+  (write-line "Γ₁ : Γₑ" my-stream)
   (loop for g in context
     do  (write-line g my-stream))
 
-  ;import
   (write-line "" my-stream)
-  (write-line "open import Plans.Mangle using (mangle)" my-stream)
-  (write-line "open import Plans.Domain" my-stream)
-  (write-line "open import Plans.Domain.Core" my-stream)
-
-  ;define domain
+  (write-line "open Data.Product renaming (_,_ to _↝_)" my-stream)
   (write-line "" my-stream)
-  (write-line (concatenate 'string outputfile "Domain : Domain") my-stream)
-  (write-line (concatenate 'string outputfile "Domain = record") my-stream)
-  (write-line "  { Predicate = R" my-stream)
-  (write-line "  ; Action = Action" my-stream)
-  (write-line "  ; Γ = Γ" my-stream)
-  (write-line "  ; _≟ₚ_ = mangle }" my-stream)
-
-  ;open domain
-  (write-line "" my-stream)
-  (write-line (concatenate 'string "open Domain " outputfile "Domain  public") my-stream)
-  (write-line "  hiding (Action; Predicate; Γ)" my-stream)
-
-)
-
-(with-open-file ( my-stream (concatenate 'string outputfile "Example.agda") :direction :output)
-
-  ;imports  
-  (write-line (concatenate 'string "open import " outputfile) my-stream)
-  (write-line (concatenate 'string "open import Plans.Semantics " outputfile "Domain") my-stream)
-  (write-line (concatenate 'string "open import Plans.Plan " outputfile "Domain") my-stream)
-  (write-line "open import Plans.Subtyping R _≟ₚ_" my-stream)
-  (write-line "open import Data.List" my-stream)
-  (write-line "open import Relation.Nullary.Decidable" my-stream)
-  (write-line "open import Data.Product renaming (_,_ to _↝_)" my-stream)
-
-  ;module
-  (write-line "" my-stream)
-  (write-line (concatenate 'string "module " outputfile "Example where") my-stream)
 
   ;Initial State
   (write-line "" my-stream)
@@ -129,5 +137,17 @@
   (write-line "" my-stream)
   (write-line "Q : State" my-stream)
   (write-line goal my-stream)
-)
 
+  ;more imports
+  (write-line "" my-stream)
+  (write-line "open import Relation.Nullary.Decidable" my-stream)
+  (write-line "open import Data.Unit" my-stream)
+
+
+
+
+
+
+
+
+  )

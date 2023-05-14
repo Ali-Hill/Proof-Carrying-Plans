@@ -9,8 +9,8 @@
    ((eq nil (car in)) (print "done"))
    ((eq 'define (car in)) (progn (print "define") (parseProblem (cdr in))))
    ((eq :objects (caar in)) (progn (print "ob") (setq objList (concatenate 'string (objectConvert (cdar in) "") " : C")) (parseProblem (cdr in))))
-   ((eq :init (caar in)) (progn (print "init") (setq init (stateConvert (cdar in) "")) (parseProblem (cdr in))))
-   ((eq :goal (caar in)) (progn (print "goal") (setq goal (stateConvert (cdar (cdar in)) "")) (parseProblem (cdr in))))
+   ((eq :init (caar in)) (progn (print "init") (setq init (cdar in)) (parseProblem (cdr in))))
+   ((eq :goal (caar in)) (progn (print "goal") (setq goal (cdar (cdar in))) (parseProblem (cdr in))))
    (t (parseProblem (cdr in)))
 
   ))
@@ -38,8 +38,8 @@
 (parseProblem input)
 
 ;objlist string
-(setq init (concatenate 'string "P = " init))
-(setq goal (concatenate 'string "Q = " goal))
+;(setq init (concatenate 'string "P = " init))
+;(setq goal (concatenate 'string "Q = " goal))
 
 ;(print objList)
 ;(print init)

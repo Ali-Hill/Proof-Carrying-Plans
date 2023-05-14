@@ -16,10 +16,6 @@ data f : Set where
   shrink : f
   act  : Action -> f
   join : f -> f -> f --changed from join f -> f -> f to Action -> f -> f for comparison of semantics
-  
-data plan : Set where
-  doAct : Action → plan → plan
-  halt : plan 
 
 ----------------------------------------------------------------------------------------------
 

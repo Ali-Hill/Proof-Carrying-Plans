@@ -29,7 +29,7 @@ data Action : Set where
     Object → Object → Action
 
 Γ : Context
-Γ (pickup_from_table x) = record {
+Γ (pickup_from_table xagda-planning.agda-lib) = record {
   preconditions =
     (+ , handempty) ∷
     (+ , ontable x) ∷

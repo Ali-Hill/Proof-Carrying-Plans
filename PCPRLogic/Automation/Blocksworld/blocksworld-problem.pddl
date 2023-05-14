@@ -9,10 +9,25 @@
 ;
 (define (problem blocksworld-problem1)
   (:domain blocksworld)
-  (:objects a b c d e f1)
-  (:init (onTable a) (onTable b) (onTable c) (onTable d)
-         (onTable e) (onTable f1) (clear a) (clear b)
-         (clear c) (clear d) (clear e) (clear f1)
-         (handEmpty))
-  (:goal (and (on a b) (on b c) (on c d) (on d e) (on e f1)))
+
+  (:objects
+      a
+      b
+  )
+
+  (:init
+      (onTable a)
+      (onTable b)
+
+      (clear a)
+      (clear b)
+
+      (handEmpty)
+  )
+
+  (:goal
+      (and
+          (on a b)
+      )
+  )
 )

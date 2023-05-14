@@ -25,12 +25,18 @@ ActionHandler = Action → World → World
 ⟦ act x ⟧ σ w = σ x w
 ⟦ join x x₁ ⟧ σ w = ⟦ x₁ ⟧ σ (⟦ x ⟧ σ w) --first actions in x
 
---union defined using minus operator
+open IsDecEquivalence isDE
+
+del : R → State → State
+del x [] = []
+del x ((z , a) ∷ S) with x ≟ a
+del x ((z , a) ∷ S) | yes p =  del x S
+del x ((z , a) ∷ S) | no ¬p = (z , a) ∷ del x S
+
+-- Override operator
 _⊔N_ : State → State → State
 P ⊔N [] = P
-P ⊔N ((z , a) ∷ Q) with isInState a P
-... | no ¬p = (z , a) ∷ P ⊔N Q
-... | yes p = (z , a) ∷ (P AnyLemma.─ p) ⊔N Q
+P ⊔N ((z , a) ∷ Q) = (z , a) ∷ del a P ⊔N Q
 
 -- Well formed handler
 
