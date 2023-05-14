@@ -1,4 +1,4 @@
-module blocksworld where
+module blocksworldExample where
 
 open import Relation.Binary.PropositionalEquality
 open import Relation.Binary

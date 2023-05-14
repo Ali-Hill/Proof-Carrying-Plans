@@ -1,3 +1,3 @@
 name: agda-planning
-include: src/ test/ Automation/Blocksworld/ Automation/Blocksworld2/ Automation/Blocksworld3/ Automation/Logistics/ Automation/Logistics2/ Automation/Logistics3/ Automation/Satellite/ Automation/Satellite2/ Automation/Satellite3/
+include: src/ test/ Automation/Blocksworld/ Automation/Blocksworld2/ Automation/Blocksworld3/ Automation/Logistics/ Automation/Logistics2/ Automation/Logistics3/ Automation/Satellite/ Automation/Satellite2/ Automation/Satellite3/ Automation/mprime/
 depend: standard-library-2.0 agda-prelude
