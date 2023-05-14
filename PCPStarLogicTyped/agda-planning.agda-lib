@@ -1,0 +1,4 @@
+name: agda-planning
+include: src/ test/
+depend: standard-library-2.0
+flags:
