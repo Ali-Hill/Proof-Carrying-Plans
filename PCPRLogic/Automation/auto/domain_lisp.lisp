@@ -70,7 +70,8 @@
   (let ((parameters ())
         (preconditions ())
         (effect ())
-        (inEffect nil))
+        (inEffect nil)
+        (temp ()))
 
   (labels ((aP (in)
         (cond
@@ -88,6 +89,21 @@
 							(aP (cdr in))))
           (t (aP (cdr in))))))
   (aP act)
+
+  (loop for p in preconditions
+		do (progn ;(print p)
+			(if (eq 'not (car p))
+						;if exp then add exp
+						(when (not (eq '= (caadr p)))
+							(setq temp (cons p temp)))
+
+						;if exp then add exp
+						(when (not (eq '= (car p)))
+								(setq temp (cons p temp))))))
+
+
+  (setq preconditions (reverse temp))
+
 
   ; We don't actually use effects but post state
   ; therefore we need to add all preconditions in p to effect that are not
