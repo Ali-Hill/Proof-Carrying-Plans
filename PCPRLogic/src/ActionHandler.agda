@@ -1,4 +1,3 @@
-\begin{code}
 open import Relation.Binary
 open import Relation.Binary.PropositionalEquality
 open import Data.Product
@@ -66,5 +65,3 @@ WfHandlerₑ Γₑ σ =
            → trueListExp (expressions (Γₑ α))
            → ValidState (postconditions (Γₑ α))
            → σ α w ∈⟨ P ⊔N (postconditions (Γₑ α)) ⟩
-
-\end{code}

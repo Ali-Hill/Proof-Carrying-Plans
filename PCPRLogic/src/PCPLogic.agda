@@ -1,4 +1,3 @@
-\begin{code}
 -- Alasdair Hill
 -- This file defines Planning languages as types, plans as prrof terms approach to PDDL
 
@@ -65,12 +64,3 @@ data  _,_¦_ :  Γₑ → (State × State) → f → Set where
                 → (ValidState Q)
                 → P <: Q
                 → Γₑ , P ↝ Q ¦ shrink
-
-\end{code}
-
-
-
-
-
-
-

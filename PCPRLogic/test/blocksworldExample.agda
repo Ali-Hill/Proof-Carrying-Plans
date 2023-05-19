@@ -7,6 +7,8 @@ open import Data.List.Relation.Unary.Any
 open import Relation.Nullary using (yes; no; Dec)
 open import Level
 open import Tactic.Deriving.Eq
+open import Relation.Nullary.Decidable
+open import Data.Unit
 
 data C : Set where
  a b : C
@@ -71,23 +73,48 @@ open Data.Product renaming (_,_ to _↝_)
 
 
 P : State
-P = (+ ↝ (ontable a)) ∷ (+ ↝ (ontable b)) ∷ (+ ↝ (clear a)) ∷ (+ ↝ (clear b)) ∷ (+ ↝ (handempty)) ∷ []
+P = (+ , (ontable a))
+    ∷ (+ , (ontable b))
+    ∷ (+ , (clear a))
+    ∷ (+ , (clear b))
+    ∷ (+ , (handempty)) ∷ []
 
 Q : State
-Q = (+ ↝ (on a b)) ∷ []
+Q = (+ , (on a b)) ∷ (+ , (ontable b)) ∷ []
 
-open import Relation.Nullary.Decidable
-open import Data.Unit
 P' : State
-P' = (+ , ontable b) ∷ (+ , clear b) ∷ (+ , handempty) ∷ (+ , ontable a) ∷ (+ , clear a) ∷ []
+P' = (+ , ontable b)
+     ∷ (+ , clear b)
+     ∷ (+ , handempty)
+     ∷ (+ , ontable a)
+     ∷ (+ , clear a) ∷ []
 
 plan : f
 plan = (join (join (act (pickup_from_table  a)) (act (putdown_on_stack  a b))) shrink)
 
 Derivation : Γ₁ , P ↝ Q ¦ plan
 Derivation = weakening P (from-yes (decSub P P')) tt (composition 
-        (weakComp (from-yes (decSub ((+ , ontable b) ∷ (+ , clear b) ∷ (+ , clear a) ∷ (- , handempty) ∷ (- , ontable a) ∷ (+ , holding a) ∷ [])
-        ((- , ontable a) ∷ (+ , ontable b) ∷ (+ , clear a) ∷ (+ , holding a) ∷ (+ , clear b) ∷ [])))
-        ((frame + (ontable b) (λ z → z) (λ z → z) (frame + (clear b) (λ z → z) (λ z → z) (applyAction tt tt tt))))
-        ((frame - (ontable a) (λ z → z) (λ z → z) (frame + (ontable b) (λ z → z) (λ z → z) (frame + (clear a) (λ z → z) (λ z → z) (applyAction tt tt tt))))))
-        (shrink tt tt (from-yes (decSub ((- , ontable a) ∷ (+ , ontable b) ∷ (+ , clear a) ∷ (- , holding a) ∷ (- , clear b) ∷ (+ , on a b) ∷ (+ , handempty) ∷ []) Q))))
+        (weakComp (from-yes
+                  (decSub ((+ , ontable b)
+                            ∷ (+ , clear b)
+                            ∷ (+ , clear a)
+                            ∷ (- , handempty)
+                            ∷ (- , ontable a)
+                            ∷ (+ , holding a) ∷ [])
+                              ((- , ontable a)
+                                ∷ (+ , ontable b)
+                                ∷ (+ , clear a)
+                                ∷ (+ , holding a)
+                                ∷ (+ , clear b) ∷ [])))
+        ((frame + (ontable b) (λ z → z) (λ z → z)
+          (frame + (clear b) (λ z → z) (λ z → z) (applyAction tt tt tt))))
+        ((frame - (ontable a) (λ z → z) (λ z → z)
+          (frame + (ontable b) (λ z → z) (λ z → z)
+          (frame + (clear a) (λ z → z) (λ z → z) (applyAction tt tt tt))))))
+        (shrink tt tt (from-yes (decSub ((- , ontable a)
+                                          ∷ (+ , ontable b)
+                                          ∷ (+ , clear a)
+                                          ∷ (- , holding a)
+                                          ∷ (- , clear b)
+                                          ∷ (+ , on a b)
+                                          ∷ (+ , handempty) ∷ []) Q))))

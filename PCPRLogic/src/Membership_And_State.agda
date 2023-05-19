@@ -1,4 +1,3 @@
-\begin{code}
 open import Relation.Binary
 open import Relation.Binary.PropositionalEquality
 open import Level
@@ -54,7 +53,6 @@ isInState At ((t , At') ∷ s) | no ¬p = isInState At s
 ------------------------------------------------------------------------------------------------
 
 -- A State is valid if there is no duplicate predicates in the State.
--- A State is valid if there is no duplicate predicates in the State.
 ValidState : State -> Set
 ValidState [] = ⊤
 ValidState ((t , At') ∷ s) with isInState At' s
@@ -96,4 +94,3 @@ isSame (z ↝ a) (.z ↝ .a) | yes refl | yes refl = yes refl
 isSame (z ↝ a) (.z ↝ a') | yes refl | no ¬p = no λ { refl → ¬p refl}
 isSame (z ↝ a) (z' ↝ a') | no ¬p | yes p = no λ { refl → ¬p refl}
 isSame (z ↝ a) (z' ↝ a') | no ¬p | no ¬p₁ = no λ { refl → ¬p refl}
-\end{code}

@@ -1,4 +1,3 @@
-\begin{code}
 open import Relation.Binary
 open import Relation.Binary.PropositionalEquality
 open import Relation.Nullary hiding (¬_)
@@ -22,13 +21,14 @@ open import Membership_And_State {Action} {R} {C} {isDE} {isDEC} {isDECA}
 consistency : ∀ {Γ P Q fs} -> Γ , (P , Q) ¦ fs -> validS P × validS Q
 consistency (weakening _ P<:P₁ ValidP P₁↝Q) with consistency P₁↝Q
 ... | ValidP₁ , ValidQ = validStateToS _ ValidP , ValidQ
-consistency (applyAction e ValidP ValidQ) =  (validStateToS _ ValidP) , validStateToS _ ValidQ
+consistency (applyAction e ValidP ValidQ) =
+  (validStateToS _ ValidP) , validStateToS _ ValidQ
 consistency (composition P↝Q Q'↝R) with consistency Q'↝R | consistency P↝Q
 ... | ValidQ' , ValidR | ValidP , ValidQ = ValidP , ValidR  
 consistency (frame z a a∉P a∉Q P↝Q) with consistency P↝Q
 ... | ValidP , ValidQ = (a∉P , ValidP) , (a∉Q , ValidQ)
-consistency (shrink ValidP ValidQ P<:Q) = (validStateToS _ ValidP) , validStateToS _ ValidQ
-
+consistency (shrink ValidP ValidQ P<:Q) =
+  (validStateToS _ ValidP) , validStateToS _ ValidQ
 
 open import Subtyping PredMap isSame
 open import Data.Product renaming (_,_ to _↝_)
@@ -38,5 +38,3 @@ weakComp Q<:Q' h h₁ = composition h (weakening _ Q<:Q' (validProof _ (proj₂ 
 
 open import ActionHandler {Action} {R} {C} {isDE} {isDEC} {isDECA}
 open IsDecEquivalence isDE hiding (refl)
-\end{code}
-
