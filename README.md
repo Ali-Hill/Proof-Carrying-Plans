@@ -47,13 +47,19 @@ Agda Version: 2.6.3
 Libraries: 
 
 Agda Standard Library:
-    Version: 2.0
+
+    Version: 2.0 
+    
     repo   : https://github.com/agda/agda-stdlib/
+    
     Commit : 7c5f3ff90fa7ff1b9d4a522050291119f209a85b
 
 Agda Prelude:
+
     Version: Master
+    
     repo   : https://github.com/UlfNorell/agda-prelude
+    
     Commit : 3d143d6d0a3f75966602480665623e87233ff93e
     
 
