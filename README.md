@@ -6,11 +6,13 @@ This repository contains all versions of the inference systems created for the s
 
 The general repo structure follows:
 
+```
 Inference system
 -- Automation
 -- src
 ---- Proofs
 -- test 
+```
 
 All inference systems such as `PCPLogic` are self contained and therefore contain their own agda library and README files.
 
