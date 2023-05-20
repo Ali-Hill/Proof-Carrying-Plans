@@ -1,14 +1,14 @@
-Actions You Can Handle 
-----------------------
+PCP$\^*$Logic
+--------------
 
-This repository contains the code used in the *Actions You Can Handle: Dependent Types for AI Plans* paper. 
+This inference system is a version of PCP$\^*$Logic that can be used with *typed* PDDL Domains. 
 
 All of the generic files that can be used for all supported PDDL domains can be found in the src folder. 
 
 Examples
 ---------
 
-Inside the test folder the taxi domain is defined along with an an example derivation using our typing relation.
+Inside the test folder the taxi domain is defined along with an example derivation using the typing relation.
 
-Also inside the test folder are the *Fuel* and *Fairness* running examples that are used in the paper.
+Also inside the test folder are the *Fuel* and *Fairness* running examples that are used in the thesis.
 
