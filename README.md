@@ -36,6 +36,8 @@ Note on Chapter 6: `PCPStarLogic` contains all of the automation and the univers
 
 Note on Automation Results: Automation results are contained in the relevant inference systems folder.
 
+Note on Code Extraction: The code extraction example can be found in the PCPStarLogic repo.
+
 `ConsistentPCPLogic` is an additional repository showcasing another strategy for making PCPLogic consistent not included in the PhD thesis. 
 
 ## Versioning 
