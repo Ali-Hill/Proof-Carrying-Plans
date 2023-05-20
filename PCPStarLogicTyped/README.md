@@ -1,7 +1,7 @@
 $PCP^*$ Logic
 --------------
 
-This inference system is a version of $\mathit{PCP}^*$ Logic that can be used with *typed* PDDL Domains. 
+This inference system is a version of PCP\ $^*$ Logic that can be used with *typed* PDDL Domains. 
 
 All of the generic files that can be used for all supported PDDL domains can be found in the src folder. 
 
