@@ -26,9 +26,11 @@ All inference systems such as `PCPLogic` are self contained and therefore contai
 
 ## Chapter Mapping
 
-*Chapter 4* -> `PCPLogic`
-*Chapter 5* -> `PCPRLogic`
-*Chapter 6* -> `PCPStarLogic` & `PCPRStarLogicTyped`
+```
+Chapter 4 -> PCPLogic
+Chapter 5 -> PCPRLogic
+Chapter 6 -> PCPStarLogic & PCPRStarLogicTyped
+```
 
 Note on Chapter 6: `PCPStarLogic` contains all of the automation and the universal property example. `PCPStarLogicTyped` contains the enriched handler examples for the taxi domain. 
 
