@@ -40,7 +40,7 @@ Note that only the Blocksworld folder contains a `runWithExtraction.lisp` file h
 5. Change the `outputfile` variable to the change the agda output file name.
 6. Run `run.lisp` with the command `clisp run.lisp`
 
-*Note on plan file format**: The plan is assumed to be a list of PDDL actions in the form ((action1)(action2)...).
+*Note on plan file format*: The plan is assumed to be a list of PDDL actions in the form ((action1)(action2)...).
 
 *Note on binary extraction*: To do extract a binary file do the above steps with the `runWithExtraction.lisp` file instead of the `run.lisp file`.
 

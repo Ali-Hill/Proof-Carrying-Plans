@@ -1,12 +1,12 @@
-# AutomationResults
+# PCP Logic
 
-This repository contains the additional automation examples created for the thesis submission.
+This folder contains the PCP Logic inference system. This folder contains all of the automation examples for PCP Logic as well as a blocksworld example and a naughty example deriving an inconsistent state.
 
 # How to Run
 
 All examples are contained in the Automation folder. An example can be run by executing the relevant run.lisp file. 
 
-## Example with blockworld 
+## Example with Blocks World 
 
 Go to the root of the folder then run
 ```shell
@@ -14,18 +14,21 @@ cd Automation/Blocksworld
 clisp run.lisp
 ```
 
-## Example Contained within Repo 
+## Use Automation for Custom PDDL Files
 
-This repo contains the additional automation results for the inference system described in Chapter 4 and Chapter 6. The Chapter 4 examples are in the root of the Automation folder and the Chapter 6 examples are contained in the World folder. Chapter 5 results are contained in the PCPLogic repo. 
+1. Create build folder and add it to the `agda-planning.agda-lib` file. Note that the folder is assumed to be 1 folder deep into Automation e.g. `Automation/ExampleProblem`. 
+2. Add the PDDL domain and problem files to the created folder. 
+4. Copy `run.lisp` from the `Automation/auto` folder into the created folder. 
+5. Change the `domainfile`, `problemfile` and `planfile` variables in `run.lisp` to the relevant files.
+6. Change the `outputfile` variable to the change the agda output file name.
+7. Change the plan variable in `run.lisp` to the plan you want to verify.
+8. Run `run.lisp` with the command `clisp run.lisp`
 
-# Versioning
+*Note on plan variable format*: The plan definition is assumed to be a list of PDDL actions in the form: 
 
-This works with Agda version 2.6.2.2: 
+``` common-lisp
+(setq plan '((pickup_from_table 'a) (putdown_on_stack 'a 'b)))
+```
 
-Agda Std Library Latest version as of commit:
+Note that the plan uses standard lisp syntax however you need to make sure that all arguments are symbols so they need to be proceeded with a `'` symbol.
 
-https://github.com/agda/agda-stdlib/commit/625a5775f0a2b4e56c9904278294e7e7f735b737
-
-Agda Prelude Version:
-
-https://github.com/UlfNorell/agda-prelude/tree/compat-2.6.2
