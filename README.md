@@ -34,6 +34,8 @@ Chapter 6 -> PCPStarLogic & PCPRStarLogicTyped
 
 Note on Chapter 6: `PCPStarLogic` contains all of the automation and the universal property example. `PCPStarLogicTyped` contains the enriched handler examples for the taxi domain. 
 
+Note on Automation Results: Automation results are contained in the relevant inference systems folder.
+
 `ConsistentPCPLogic` is an additional repository showcasing another strategy for making PCPLogic consistent not included in the PhD thesis. 
 
 ## Versioning 
